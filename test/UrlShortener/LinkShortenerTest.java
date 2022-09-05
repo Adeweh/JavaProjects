@@ -27,5 +27,18 @@ class LinkShortenerTest {
         assertEquals("https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github", converter.getUrl(1));
 
     }
+    @Test
+    void testThatKeysCanBeConverted(){
+        converter.addURL(234,"https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github");
+
+        assertEquals("dW", converter.getConvertedKey(234));
+
+    }
+    @Test
+    void testThatConvertedKeysCanGenerateShortLinks(){
+        converter.addURL(234,"https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github");
+        assertEquals("https://newURL.dW", converter.getShortURL("dW"));
+    }
+
 
 }

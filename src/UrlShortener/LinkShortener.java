@@ -20,4 +20,12 @@ public class LinkShortener {
     public String getUrl(int key) {
         return links.get(key);
     }
+
+    public String getConvertedKey(int key) {
+        return KeyGenerator.convertKey(key);
+    }
+
+    public String getShortURL(String convertedKey) {
+        return "https://newURL." + convertedKey;
+    }
 }
