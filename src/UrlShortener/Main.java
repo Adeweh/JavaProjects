@@ -9,6 +9,13 @@ public class Main {
 
     private static  final SecureRandom random = new SecureRandom();
     public static void main(String[] args) {
+        mainMenu();
+
+
+
+
+    }
+    public static void mainMenu(){
         System.out.println("""
                 Java Url Shortener App
                 
@@ -18,13 +25,13 @@ public class Main {
                 """);
         int response = userInput.nextInt();
         userInput.nextLine();
-
-
     }
     private static void shortenURL(){
         System.out.println("Please enter your link: ");
         String link= userInput.nextLine();
         int requestKey = random.nextInt();
+
+
 
 
 
