@@ -37,7 +37,16 @@ class LinkShortenerTest {
     @Test
     void testThatConvertedKeysCanGenerateShortLinks(){
         converter.addURL(1,"https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github");
-        assertEquals("https://newURL.dW", converter.getShortURL("dW"));
+        assertEquals("https://newURL.com/dW", converter.getShortURL("dW"));
+    }
+
+    @Test
+    void testThatOriginURLCanBeRetrieved(){
+        converter.addURL(234,"https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github");
+        String convertedKey = converter.getConvertedKey(234);
+
+        assertEquals(234, converter.getKey(convertedKey));
+
     }
 
 
