@@ -29,7 +29,13 @@ public class LinkShortener {
         return "https://newURL.com/" + convertedKey;
     }
 
-    public int getKey(String convertedKey) {
-        return  KeyGenerator.getKey(convertedKey);
+    public int getKey(String shortURl) {
+        String[] keyArray = shortURl.split("/");
+
+        return KeyGenerator.getKey(keyArray[keyArray.length-1]);
+
+
+
+
     }
 }

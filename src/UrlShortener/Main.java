@@ -65,11 +65,13 @@ public class Main {
     private static void retrieveURL(){
         System.out.println("Please enter your short link below: ");
         String shortURL = userInput.nextLine();
-        String[] keyArray = shortURL.split("/");
+        //String[] keyArray = shortURL.split("/");
 
        // int gottenKey = converter.getKey(shortURL);
 
-        System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(keyArray[keyArray.length-1])));
+       // System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(keyArray[keyArray.length-1])));
+
+        System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(shortURL)));
 
         mainMenu();
 
