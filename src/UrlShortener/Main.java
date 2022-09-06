@@ -69,7 +69,7 @@ public class Main {
 
        // int gottenKey = converter.getKey(shortURL);
 
-        System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(keyArray[keyArray.length-1])));
+        System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(keyArray[keyArray.length-1]))); //todo @Adeweh your link shortener object should be doing this internally, not on the main
 
         mainMenu();
 
