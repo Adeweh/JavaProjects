@@ -57,7 +57,11 @@ public class Main {
         int key = random.nextInt(22_000_000);
 
         converter.addURL(key, link);
+        //todo something like String shortUrl = converter.shorten(link);
+        //todo System.out.println(shortUrl)
         System.out.printf("Short link:%s%n ", converter.getShortURL(converter.getConvertedKey(key)));
+        //todo you should converter.getShortUrl(key)
+        //todo hide the logic from the main
 
 
         mainMenu();
@@ -73,6 +77,7 @@ public class Main {
        // System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(keyArray[keyArray.length-1])));
 
         System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(shortURL)));
+        //todo you should hide the logic from main
 
 
         mainMenu();
