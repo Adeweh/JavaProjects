@@ -58,7 +58,7 @@ public class Main {
 
         converter.addURL(key, link);
         System.out.printf("Short link:%s%n ", converter.getShortURL(converter.getConvertedKey(key)));
-        userInput.nextLine();
+
 
         mainMenu();
     }
