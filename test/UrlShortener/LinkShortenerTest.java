@@ -21,10 +21,9 @@ class LinkShortenerTest {
 
     @Test
     void  testThatSavedURLCanBeGotten(){
-        converter.addURL(0, "https://www.webfx.com/digital-marketing/learn/long-domain-name-vs-short/");
-        converter.addURL(1,"https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github");
+        String shortURL = converter.getShortURL("https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github");
 
-        assertEquals("https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github", converter.getUrl(1));
+        assertEquals("https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github", converter.getUrl(shortURL));
 
     }
     @Test
@@ -36,8 +35,10 @@ class LinkShortenerTest {
     }
     @Test
     void testThatConvertedKeysCanGenerateShortLinks(){
-        converter.addURL(1,"https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github");
-        assertEquals("https://newURL.com/dW", converter.getShortURL("dW"));
+        String shortURL = converter.getShortURL("https://stackoverflow.com/questions/28920705/intellij-doesnt-work-correctly-with-cloning-project-from-github");
+        int key = converter.getKey(shortURL);
+        String convertedKey = converter.getConvertedKey(key);
+        assertEquals("https://newURL.com/" + convertedKey, shortURL);
     }
 
     @Test

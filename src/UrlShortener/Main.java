@@ -53,15 +53,9 @@ public class Main {
         System.out.println("Please enter your link: ");
         String link= userInput.nextLine();
 
-        SecureRandom random = new SecureRandom();
-        int key = random.nextInt(22_000_000);
+        String shortURL = converter.getShortURL(link);
 
-        converter.addURL(key, link);
-        //todo something like String shortUrl = converter.shorten(link);
-        //todo System.out.println(shortUrl)
-        System.out.printf("Short link:%s%n ", converter.getShortURL(converter.getConvertedKey(key)));
-        //todo you should converter.getShortUrl(key)
-        //todo hide the logic from the main
+        System.out.printf("Short link:%s%n ", shortURL);
 
 
         mainMenu();
@@ -69,15 +63,11 @@ public class Main {
     private static void retrieveURL(){
         System.out.println("Please enter your short link below: ");
         String shortURL = userInput.nextLine();
-        //String[] keyArray = shortURL.split("/");
 
-       // int gottenKey = converter.getKey(shortURL);
+        String link = converter.getUrl(shortURL);
 
+        System.out.printf("Retrieved Link: %s%n", link );
 
-       // System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(keyArray[keyArray.length-1])));
-
-        System.out.printf("Retrieved Link: %s%n", converter.getUrl(converter.getKey(shortURL)));
-        //todo you should hide the logic from main
 
 
         mainMenu();
