@@ -100,9 +100,21 @@ public class Main {
     private static void checkOut() {
     }
     private static void customerDetails() {
+        System.out.println("Enter Customer Id: ");
+        int customerId = userInput.nextInt();
+
+        for (Customer customer: hotel.getAllCustomers()) {
+            if(customer.getCustomerId() == customerId)
+            System.out.println(customer);
+        }
+        adminOptions();
     }
 
     private static void viewAllRooms() {
+        for (Room room: hotel.rooms) {
+            System.out.println(room);
+        }
+        adminOptions();
     }
 
     private static void roomStatus() {
@@ -230,16 +242,23 @@ public class Main {
     private static void roomBooking(Customer newCustomer, RoomTypes roomType){
         for (Room newRoom: hotel.getListOfRooms()) {
             if(newRoom.getRoomType() == roomType){
-                System.out.printf("Please make payment of N%,f: ", newRoom.getRoomPrice());
+                System.out.printf("Please make payment of N%,.2f: ", newRoom.getRoomPrice());
                 double amount = userInput.nextDouble();
 
                 hotel.makePayment(newCustomer,newRoom, amount);
                 hotel.bookRoom(newCustomer, newRoom);
-                mainMenu();
+                System.out.println("""
+                        Room Successfully booked
+                        
+                        Would you like to book another room?
+                        1. Yes
+                        2. No
+                        """);
+                int response = userInput.nextInt();
+                if (response == 1) bookRoom();
+                else if (response == 2) customerOptions();
+                }
             }
-
-
-        }
         System.out.println("Room is unavailable");
     }
 
