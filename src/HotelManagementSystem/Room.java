@@ -49,4 +49,14 @@ public class Room {
     public double getRoomPrice(){
         return  roomPrice;
     }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                Room No: %d
+                Room Status: %s
+                Room Type: %s
+                Room Price: %f
+                """, getRoomNumber(), getRoomStatus(), getRoomType(), getRoomPrice());
+    }
 }

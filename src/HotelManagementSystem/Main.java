@@ -3,6 +3,7 @@ package HotelManagementSystem;
 import HotelManagementSystem.Enums.RoomStatus;
 import HotelManagementSystem.Enums.RoomTypes;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 import static HotelManagementSystem.Enums.RoomTypes.*;
@@ -17,7 +18,10 @@ public class Main {
 
 
     public static void main(String[] args) {
-        adminMenu();
+        Admin admin = new Admin("Dorcas", "Password");
+        hotel.addAdmin(admin);
+
+        mainMenu();
     }
 
     private static void adminMenu(){
@@ -30,11 +34,21 @@ public class Main {
         System.out.println("Enter password: ");
         String password = userInput.nextLine();
 
-        Admin admin = new Admin(username,password);
+        for (Admin admin: hotel.getAllAdmins() ) {
+            if(Objects.equals(admin.getUserName(), username)){
+                if(Objects.equals(admin.getPassword(), password)){
+                    adminOptions();
+                }
+                else System.out.println("Login failed. Try again");
+                mainMenu();
+            }
 
+        }
+        System.out.println("Admin not found");
         mainMenu();
 
-    }
+
+   }
 
     private static void mainMenu() {
 
@@ -49,7 +63,7 @@ public class Main {
         int option = userInput.nextInt();
         userInput.nextLine();
 
-        if (option == 1) adminOptions();
+        if (option == 1) adminMenu();
         else if (option == 2) customerLogin();
         else if (option == 0) {
             System.out.println("Hope you enjoyed using our services. Thank you");
@@ -168,11 +182,11 @@ public class Main {
         System.out.println("Enter your email: ");
         String email = userInput.nextLine();
         for (Customer customer:hotel.getAllCustomers()) {
-            if(customer.getEmail() == email){
+            if(Objects.equals(customer.getEmail(), email)){
                 customerOptions();
             }
         }System.out.println("User not registered. Try again");
-        mainMenu();
+        register();
     }
 
 
