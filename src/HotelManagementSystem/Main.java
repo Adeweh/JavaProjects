@@ -1,11 +1,14 @@
 package HotelManagementSystem;
 
+import HotelManagementSystem.Enums.CustomerPaymentStatus;
 import HotelManagementSystem.Enums.RoomStatus;
 import HotelManagementSystem.Enums.RoomTypes;
 
 import java.util.Objects;
 import java.util.Scanner;
 
+import static HotelManagementSystem.Enums.CustomerPaymentStatus.EXPIRED;
+import static HotelManagementSystem.Enums.RoomStatus.AVAILABLE;
 import static HotelManagementSystem.Enums.RoomTypes.*;
 
 public class Main {
@@ -67,9 +70,9 @@ public class Main {
         else if (option == 2) customerLogin();
         else if (option == 0) {
             System.out.println("Hope you enjoyed using our services. Thank you");
+            System.exit(0);
         } else {
             System.out.println("Invalid Selection. Try again Please");
-            mainMenu();
         }
     }
         private static void adminOptions() {
@@ -98,6 +101,25 @@ public class Main {
         }
 
     private static void checkOut() {
+        System.out.println("Enter Customer id: ");
+        customerId = userInput.nextInt();
+
+        System.out.println("Enter room number: ");
+        int roomNumber = userInput.nextInt();
+
+        Customer findCustomer = hotel.getCustomer(customerId);
+
+        Room findRoom = hotel.getRoom(roomNumber);
+
+
+        for (Customer customer: hotel.getAllCustomers()){
+            if (customer.getCustomerId() == customerId){
+                customer.setPaymentStatus(EXPIRED);
+                hotel.checkOut(findCustomer, findRoom);
+                System.out.println("Thank you for staying with us");
+            }
+        }
+        adminOptions();
     }
     private static void customerDetails() {
         System.out.println("Enter Customer Id: ");
@@ -241,7 +263,7 @@ public class Main {
 
     private static void roomBooking(Customer newCustomer, RoomTypes roomType){
         for (Room newRoom: hotel.getListOfRooms()) {
-            if(newRoom.getRoomType() == roomType){
+            if(newRoom.getRoomType() == roomType && newRoom.getRoomStatus() == AVAILABLE){
                 System.out.printf("Please make payment of N%,.2f: ", newRoom.getRoomPrice());
                 double amount = userInput.nextDouble();
 

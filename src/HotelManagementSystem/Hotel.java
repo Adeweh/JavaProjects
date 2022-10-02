@@ -38,6 +38,7 @@ public class Hotel {
         return rooms.size();
     }
 
+
     public void addCustomer(Customer newCustomer) {
         newCustomer.setCustomerId(customers.size() + 1);
          customers.add(newCustomer);
@@ -92,6 +93,16 @@ public class Hotel {
         for (int i = 0; i < customers.size(); i++) {
             if (customerId == customers.get(i).getCustomerId()){
                 return customers.get(i);
+            }
+
+        }
+
+        return null;
+    }
+    public Room getRoom(int roomNumber) {
+        for (int i = 0; i < rooms.size(); i++) {
+            if (roomNumber == rooms.get(i).getRoomNumber()){
+                return rooms.get(i);
             }
 
         }
