@@ -25,36 +25,18 @@ public class Main {
         int i = 0;
         while (i < student && choice != 0) {
 
-            System.out.printf("entering score for student %d", i + 1);
+            System.out.printf("Entering score for STUDENT %2d", i + 1);
+            System.out.println();
             for (int j = 0; j < subject; j++) {
-                System.out.printf("Enter score for SUBJECT :%d ", j + 1);
-                studentGrade.addScore(i,j,userInput.nextInt());
+                System.out.printf("Enter score for SUBJECT %2d: ", j + 1);
+                studentGrade.addScore(i, j, userInput.nextInt());
             }
-            System.out.println("Press 0 to end  or 1 to enter another score:");
+            System.out.println("Press 0 to end  or 1 to Enter for next Student:");
             choice = userInput.nextInt();
             i++;
 
         }
         studentGrade.displayGrades();
-
-
-//        do {
-//            System.out.println("Enter score for SUBJECT 1: ");
-//            studentGrade.setScores(userInput.nextInt());
-//
-//            System.out.println("Enter score for SUBJECT 2: ");
-//            studentGrade.setScores(userInput.nextInt());
-//
-//            System.out.println("Enter score for SUBJECT 3: ");
-//            studentGrade.setScores(userInput.nextInt());
-
-//
-//            System.out.println("Press 0 to end  or 1 to enter another score:");
-//            choice = userInput.nextInt();
-//        } while (choice == 1);
-
-
-
-
     }
+
 }
