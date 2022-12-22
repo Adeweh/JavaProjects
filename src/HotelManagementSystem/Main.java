@@ -27,6 +27,29 @@ public class Main {
         mainMenu();
     }
 
+    private static void mainMenu() {
+
+        System.out.println("""
+                 WELCOME TO GASKIYA HOTELS
+                 
+                 Please login:
+                 1.Admin
+                 2.Customer
+                 0.Exit 
+                """);
+        int option = userInput.nextInt();
+        userInput.nextLine();
+
+        if (option == 1) adminMenu();
+        else if (option == 2) customerLogin();
+        else if (option == 0) {
+            System.out.println("Hope you enjoyed using our services. Thank you");
+            System.exit(0);
+        } else {
+            System.out.println("Invalid Selection. Try again Please");
+        }
+    }
+
     private static void adminMenu(){
 
         System.out.println("WELCOME TO GASKIYA HOTELS");
@@ -50,33 +73,10 @@ public class Main {
         System.out.println("Admin not found");
         mainMenu();
 
-
    }
 
-    private static void mainMenu() {
-
+    private static void adminOptions() {
         System.out.println("""
-                 WELCOME TO GASKIYA HOTELS
-                 
-                 Please login:
-                 1.Admin
-                 2.Customer
-                 0.Exit 
-                """);
-        int option = userInput.nextInt();
-        userInput.nextLine();
-
-        if (option == 1) adminMenu();
-        else if (option == 2) customerLogin();
-        else if (option == 0) {
-            System.out.println("Hope you enjoyed using our services. Thank you");
-            System.exit(0);
-        } else {
-            System.out.println("Invalid Selection. Try again Please");
-        }
-    }
-        private static void adminOptions() {
-            System.out.println("""
                                     
                               
                     1.REGISTER CUSTOMER
@@ -88,17 +88,18 @@ public class Main {
                     7.EXIT           
                     """);
 
-            int prompt = userInput.nextInt();
-            switch (prompt) {
-                case 1 -> register();
-                case 2 -> addRoom();
-                case 3 -> roomStatus();
-                case 4 -> viewAllRooms();
-                case 5 -> customerDetails();
-                case 6-> checkOut();
-                case 7-> mainMenu();
-            }
+        int prompt = userInput.nextInt();
+        switch (prompt) {
+            case 1 -> register();
+            case 2 -> addRoom();
+            case 3 -> roomStatus();
+            case 4 -> viewAllRooms();
+            case 5 -> customerDetails();
+            case 6-> checkOut();
+            case 7-> mainMenu();
         }
+    }
+
 
     private static void checkOut() {
         System.out.println("Enter Customer id: ");
@@ -111,14 +112,10 @@ public class Main {
 
         Room findRoom = hotel.getRoom(roomNumber);
 
+        findCustomer.setPaymentStatus(EXPIRED);
+        hotel.checkOut(findCustomer, findRoom);
+        System.out.println("Thank you for staying with us");
 
-        for (Customer customer: hotel.getAllCustomers()){
-            if (customer.getCustomerId() == customerId){
-                customer.setPaymentStatus(EXPIRED);
-                hotel.checkOut(findCustomer, findRoom);
-                System.out.println("Thank you for staying with us");
-            }
-        }
         adminOptions();
     }
     private static void customerDetails() {
@@ -194,6 +191,16 @@ public class Main {
         mainMenu();
 
     }
+    private static void customerLogin() {
+        System.out.println("Enter your email: ");
+        String email = userInput.nextLine();
+        for (Customer customer:hotel.getAllCustomers()) {
+            if(Objects.equals(customer.getEmail(), email)){
+                customerOptions();
+            }
+        }System.out.println("User not registered. Try again");
+        register();
+    }
 
     private static void customerOptions() {
         System.out.println("""
@@ -208,20 +215,17 @@ public class Main {
         userInput.nextLine();
         switch (prompt) {
             case 1 -> bookRoom();
+            case 2-> availableRooms();
+            case 3-> roomDetails();
             case 4->mainMenu();
         }
     }
 
-    private static void customerLogin() {
-        System.out.println("Enter your email: ");
-        String email = userInput.nextLine();
-        for (Customer customer:hotel.getAllCustomers()) {
-            if(Objects.equals(customer.getEmail(), email)){
-                customerOptions();
-            }
-        }System.out.println("User not registered. Try again");
-        register();
+
+    private static void roomDetails() {
     }
+
+
 
 
     private static void availableRooms() {
