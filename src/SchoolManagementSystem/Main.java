@@ -29,14 +29,26 @@ public class Main {
             System.out.println();
             for (int j = 0; j < subject; j++) {
                 System.out.printf("Enter score for SUBJECT %2d: ", j + 1);
-                studentGrade.addScore(i, j, userInput.nextInt());
+                int score = userInput.nextInt();
+                while (score > 100 || score < 0) {
+                    System.out.println("Invalid score:  please enter score between 0 and 100");
+                    System.out.printf("Enter score for SUBJECT %2d: ", j + 1);
+                    score = userInput.nextInt();
+                }
+                studentGrade.addScore(i, j, score);
             }
             System.out.println("Press 0 to end  or 1 to Enter for next Student:");
             choice = userInput.nextInt();
+            while (choice > 1 || choice < 0) {
+                System.out.println("invalid input ");
+                System.out.println("Press 0 to end  or 1 to Enter for next Student:");
+                choice = userInput.nextInt();
+            }
             i++;
 
         }
         studentGrade.displayGrades();
+        studentGrade.subjectSummary();
     }
 
 }

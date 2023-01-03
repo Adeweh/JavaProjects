@@ -55,13 +55,143 @@ public class School {
     }
 
     public int findMax(List<Integer> integers) {
-        IntStream stream =
-                integers.stream().flatMapToInt(IntStream::of);
+        IntStream stream = integers.stream().flatMapToInt(IntStream::of);
         OptionalInt obj = stream.max();
         if (obj.isPresent()) {
             return obj.getAsInt();
         }
         return -1;
+    }
+
+    int max;
+    int min;
+
+    int noOfPasses = 0;
+    int noOfFails = 0;
+
+    private ArrayList<Integer> getSubjectScores(int subNo) {
+        ArrayList<Integer> scores = new ArrayList<>();
+        for (Student student : studentList) {
+            scores.add(student.getSubjects().get(subNo).getScore());
+        }
+        return scores;
+    }
+
+    public int getTotal(int subNo) {
+        return getSubjectScores(subNo).stream().reduce(Integer::sum).get();
+    }
+
+    public int getHighestScoringStudent(int subjectNo) {
+        ArrayList<Integer> scores = new ArrayList<>();
+        for (Student student : studentList) {
+            scores.add(student.getSubjects().get(subjectNo).getScore());
+        }
+        max = scores.get(0);
+
+        for (int i = 0; i < studentList.size(); i++) {
+            Subject subject = studentList.get(i).getSubjects().get(subjectNo);
+
+            if (max == subject.getScore()) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
+
+    public int getHighestScore() {
+        return max;
+    }
+
+
+    public int getNoOfPasses(int sub) {
+        return getSubjectScores(sub).stream().filter(score -> score >= 50).toList().size();
 
     }
+
+
+    public int getNoOfFails(int sub) {
+        return getSubjectScores(sub).stream().filter(score -> score < 50).toList().size();
+    }
+
+
+    public int getHardestSubject() {
+        List<Subject> subjects = studentList.get(0).getSubjects();
+        int max = 0;
+        for (Subject subject : subjects) {
+            if (subject.getScore() < max) {
+                max = subject.getScore();
+            }
+
+        }
+        for (Subject subject : subjects) {
+            if (subject.getScore() == max) {
+                return subjects.indexOf(subject);
+            }
+        }
+        return -1;
+    }
+
+    public int getEasiestSubject() {
+        List<Subject> subjects = studentList.get(0).getSubjects();
+        int min = 101;
+
+        for (Subject subject : subjects) {
+
+            if (subject.getScore() > min) {
+                min = subject.getScore();
+            }
+        }
+        for (Subject subject : subjects) {
+            if (subject.getScore() == min) {
+                return subjects.indexOf(subject);
+            }
+        }
+        return -1;
+    }
+
+    private int getHighest() {
+        int highestScore = 0;
+        for (Student student : studentList) {
+            for (Subject subject : student.getSubjects()) {
+                if (subject.getScore() > highestScore) {
+                    highestScore = subject.getScore();
+                }
+            }
+        }
+        return highestScore;
+    }
+
+    public int getOverallHighestScore() {
+        return getHighest();
+    }
+
+    public int getStudentWithOverallHighest() {
+        int highestScore = getHighest();
+
+        for (Student student : studentList) {
+            for (Subject subject : student.getSubjects()) {
+                if (subject.getScore() == highestScore) {
+                    return studentList.indexOf(student);
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int getSubWithOverallHighestScore() {
+        int highestScore = getHighest();
+
+        for (Student student : studentList) {
+            for (Subject subject : student.getSubjects()) {
+                if (subject.getScore() == highestScore) {
+                    return student.getSubjects().indexOf(subject);
+                }
+            }
+        }
+        return -1;
+    }
+
+
+
 }

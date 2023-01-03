@@ -15,6 +15,8 @@ public class Student {
 
     }
 
+
+
     public void setScore(int subject, int score) {
         Subject subject1 = subjectList.get(subject);
         subject1.setScore(score);
