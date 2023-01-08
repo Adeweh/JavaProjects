@@ -87,8 +87,13 @@ public class School {
             scores.add(student.getSubjects().get(subjectNo).getScore());
         }
         max = scores.get(0);
+        for (int score: scores){
+            if ( score >=max){
+                max = score;
+            }
+        }
 
-        for (int i = 0; i < studentList.size(); i++) {
+        for (int i = 0; i <= studentList.size(); i++) {
             Subject subject = studentList.get(i).getSubjects().get(subjectNo);
 
             if (max == subject.getScore()) {
@@ -100,6 +105,7 @@ public class School {
 
 
     public int getHighestScore() {
+
         return max;
     }
 
